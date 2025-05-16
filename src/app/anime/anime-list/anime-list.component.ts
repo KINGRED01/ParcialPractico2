@@ -19,7 +19,7 @@ export class AnimeListComponent implements OnInit {
       this.animes = animes;
     });
   }
-
+// pormedio de las rating y total de episodios
   getAverageRating(): number {
     if (!this.animes || this.animes.length === 0) return 0;
     const sum = this.animes.reduce((acc, anime) => acc + Number(anime.Rating), 0);

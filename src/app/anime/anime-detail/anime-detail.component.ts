@@ -26,7 +26,7 @@ export class AnimeDetailComponent implements OnInit {
       });
     }
   }
-
+// boton para volver
   goBack(): void {
     this.router.navigate(['/']);
   }

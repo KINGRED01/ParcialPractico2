@@ -7,7 +7,7 @@ export class Anime {
   categorie: string;
   studio: string;
   img: string;
-  seasons: Season[]
+  seasons: Season[] // temporadoas añadidas
 
   constructor(
     id: number,

@@ -1,7 +1,6 @@
 <div class="container-fluid">
   <div class="row">
-
-    <div class="col">
+    <div class="col-9 anime-detail-info">
       <dl>
         <p class="h3">{{ animeDetail.name }}</p>
         <dt class="bold">Description</dt>
@@ -16,34 +15,55 @@
         <dt class="bold">Number of episodes</dt>
         <dd class="caption">{{ animeDetail.total_episodes }}</dd>
         <hr />
-
       </dl>
-    </div>
-    <div class="col-3">
-      <div class="thumb">
-        <img
-          class="img-fluid"
-          src="{{ animeDetail.img }}"
-          alt="{{ animeDetail.name }}"
-        />
-      </div>
-    </div>
-  </div>
-  <button class="btn btn-secondary mb-3" (click)="goBack()">Volver</button>
-  <h4>Seasons</h4>
-  <ul class="list-group mb-3">
-    <li class="list-group-item d-flex justify-content-between align-items-center"
-        *ngFor="let season of animeDetail.seasons; let i = index">
-      Temporada {{ i + 1 }}: {{ season.name }}
-      <span class="badge bg-primary rounded-pill">{{ season.episodes.length }} capítulos</span>
-      <ul class="list-group mt-2 w-100">
-        <li class="list-group-item" *ngFor="let episode of season.episodes">
-          {{ episode.name }}
+      <button class="btn btn-secondary mb-3" (click)="goBack()">Volver</button>
+      <h4>Seasons</h4>
+      <ul class="list-group mb-3">
+        <li class="list-group-item d-flex justify-content-between align-items-center"
+            *ngFor="let season of animeDetail.seasons; let i = index">
+          Temporada {{ i + 1 }}: {{ season.name }}
+          <span class="badge bg-primary rounded-pill">{{ season.episodes.length }} capítulos</span>
+          <ul class="list-group mt-2 w-100">
+            <li class="list-group-item" *ngFor="let episode of season.episodes">
+              {{ episode.name }}
+            </li>
+          </ul>
         </li>
       </ul>
-    </li>
-  </ul>
-  <div class="text-center mb-4">
-    <img src="assets/logo-anime.png" alt="Anime App Logo" class="img-fluid" style="max-height: 100px;">
+      <div class="text-center mb-4">
+        <img src="assets/logo-anime.png" alt="Anime App Logo" class="img-fluid" style="max-height: 100px;">
+      </div>
+    </div>
+    <div class="col-3 anime-detail-image d-flex align-items-start justify-content-end">
+      <img
+        class="img-fluid"
+        src="{{ animeDetail.img }}"
+        alt="{{ animeDetail.name }}"
+        style="max-width: 100%; border-radius: 8px;"
+      />
+    </div>
   </div>
- </div>
+</div>
+<style>
+.anime-detail-info {
+  /* Ocupa 4/5 de la fila (col-9) */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.anime-detail-image {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.anime-detail-image img {
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+  border-radius: 8px;
+}
+</style>
