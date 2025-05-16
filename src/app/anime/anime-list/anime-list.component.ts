@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Anime } from '../anime';
 import { AnimeService } from '../anime.service';
 
@@ -9,10 +10,9 @@ import { AnimeService } from '../anime.service';
 })
 export class AnimeListComponent implements OnInit {
 
-  selectedBAnime!: Anime;
-  selected = false;
   animes: Array<Anime> = [];
-  constructor(private animeService: AnimeService) { }
+  selectedBAnime?: Anime;
+  constructor(private animeService: AnimeService, private router: Router) { }
 
   getAnimes(): void {
     this.animeService.getAnimes().subscribe((animes) => {
@@ -20,13 +20,21 @@ export class AnimeListComponent implements OnInit {
     });
   }
 
-  onSelected(anime: Anime): void {
-    this.selected = true;
+  getAverageRating(): number {
+    if (!this.animes || this.animes.length === 0) return 0;
+    const sum = this.animes.reduce((acc, anime) => acc + Number(anime.Rating), 0);
+    return +(sum / this.animes.length).toFixed(2);
+  }
+
+  getTotalEpisodes(): number {
+    return this.animes.reduce((acc, anime) => acc + (anime.total_episodes || 0), 0);
+  }
+
+  onSelect(anime: Anime): void {
     this.selectedBAnime = anime;
   }
 
   ngOnInit() {
     this.getAnimes();
   }
-
 }

@@ -29,4 +29,21 @@
       </div>
     </div>
   </div>
+  <button class="btn btn-secondary mb-3" (click)="goBack()">Volver</button>
+  <h4>Seasons</h4>
+  <ul class="list-group mb-3">
+    <li class="list-group-item d-flex justify-content-between align-items-center"
+        *ngFor="let season of animeDetail.seasons; let i = index">
+      Temporada {{ i + 1 }}: {{ season.name }}
+      <span class="badge bg-primary rounded-pill">{{ season.episodes.length }} capítulos</span>
+      <ul class="list-group mt-2 w-100">
+        <li class="list-group-item" *ngFor="let episode of season.episodes">
+          {{ episode.name }}
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <div class="text-center mb-4">
+    <img src="assets/logo-anime.png" alt="Anime App Logo" class="img-fluid" style="max-height: 100px;">
+  </div>
  </div>

@@ -1,4 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AnimeService } from '../anime.service';
 import { Anime } from '../anime';
 
 @Component({
@@ -8,12 +10,24 @@ import { Anime } from '../anime';
 })
 export class AnimeDetailComponent implements OnInit {
 
-  @Input() animeDetail!: Anime;
+  animeDetail!: Anime;
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private animeService: AnimeService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    if (id) {
+      this.animeService.getAnime(id).subscribe(anime => {
+        this.animeDetail = anime;
+      });
+    }
   }
 
-
+  goBack(): void {
+    this.router.navigate(['/']);
+  }
 }
